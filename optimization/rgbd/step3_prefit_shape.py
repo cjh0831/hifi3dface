@@ -68,22 +68,40 @@ def load_from_npz(base_dir):
 
 
 def load_pca_models(modle_base, basis3dmm_path):
-    import h5py
+    # import h5py
 
-    datas = h5py.File(os.path.join(modle_base, "next_face_info_only_head.mat"), "r")
-    kp_86_h = np.asarray(datas.get("kp_86_h")).reshape(-1, 1)
-    tempid = np.squeeze(np.asarray(datas.get("vertex_state")))  # n
+    # datas = h5py.File(os.path.join(modle_base, "next_face_info_only_head.mat"), "r")
+    # kp_86_h = np.asarray(datas.get("kp_86_h")).reshape(-1, 1)
+    # tempid = np.squeeze(np.asarray(datas.get("vertex_state")))  # n
+    # id_h = np.where(tempid > 0.5)
+    # id_h = np.array(id_h)
+    # id_h_h3 = get_kp3d(id_h)  # n
+    # tri_h_used = (np.array(datas.get("tri_h_used")).astype(np.int32) - 1).T  # 3 * n
+
+    # basis3dmm = scipy.io.loadmat(basis3dmm_path)
+    # mu_shape = np.array(basis3dmm["mu_shape"][:, id_h_h3]).transpose()  # n * 1
+    # pcev_shape = np.array(basis3dmm["basis_shape"][:, id_h_h3]).transpose()  # n * 500
+
+    # datas = h5py.File(os.path.join(modle_base, "shape_ev.mat"), "r")
+    # ev_f = np.asarray(datas.get("ev_f")).reshape(-1, 1)
+    # sigma_shape = np.sqrt(ev_f / np.sum(ev_f))
+
+    # return mu_shape, pcev_shape, sigma_shape, tri_h_used, kp_86_h
+
+    datas = scio.loadmat(os.path.join(modle_base, "next_face_info_only_head.mat"))
+    kp_86_h = np.asarray(datas["kp_86_h"]).reshape(-1, 1)
+    tempid = np.squeeze(np.asarray(datas["vertex_state"]))  # n
     id_h = np.where(tempid > 0.5)
     id_h = np.array(id_h)
     id_h_h3 = get_kp3d(id_h)  # n
-    tri_h_used = (np.array(datas.get("tri_h_used")).astype(np.int32) - 1).T  # 3 * n
+    tri_h_used = (np.array(datas["tri_h_used"]).astype(np.int32) - 1).T  # 3 * n
 
-    basis3dmm = scipy.io.loadmat(basis3dmm_path)
+    basis3dmm = scio.loadmat(basis3dmm_path)
     mu_shape = np.array(basis3dmm["mu_shape"][:, id_h_h3]).transpose()  # n * 1
     pcev_shape = np.array(basis3dmm["basis_shape"][:, id_h_h3]).transpose()  # n * 500
 
-    datas = h5py.File(os.path.join(modle_base, "shape_ev.mat"), "r")
-    ev_f = np.asarray(datas.get("ev_f")).reshape(-1, 1)
+    datas = scio.loadmat(os.path.join(modle_base, "shape_ev.mat"))
+    ev_f = np.asarray(datas["ev_f"]).reshape(-1, 1)
     sigma_shape = np.sqrt(ev_f / np.sum(ev_f))
 
     return mu_shape, pcev_shape, sigma_shape, tri_h_used, kp_86_h
