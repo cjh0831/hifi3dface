@@ -319,16 +319,16 @@ def RGBD_opt(_):
                         basis3dmm["tri"], basis3dmm["tri_vt"]
                     ):
                         v_rgb[v1] = uv_map[
-                            int((1.0 - basis3dmm["vt_list"][t1][1]) * uv_size),
-                            int(basis3dmm["vt_list"][t1][0] * uv_size),
+                            int((1.0 - basis3dmm["vt_list"][t1][1]) * uv_size) % uv_size,
+                            int(basis3dmm["vt_list"][t1][0] * uv_size) % uv_size,
                         ]
                         v_rgb[v2] = uv_map[
-                            int((1.0 - basis3dmm["vt_list"][t2][1]) * uv_size),
-                            int(basis3dmm["vt_list"][t2][0] * uv_size),
+                            int((1.0 - basis3dmm["vt_list"][t2][1]) * uv_size) % uv_size,
+                            int(basis3dmm["vt_list"][t2][0] * uv_size) % uv_size,
                         ]
                         v_rgb[v3] = uv_map[
-                            int((1.0 - basis3dmm["vt_list"][t3][1]) * uv_size),
-                            int(basis3dmm["vt_list"][t3][0] * uv_size),
+                            int((1.0 - basis3dmm["vt_list"][t3][1]) * uv_size) % uv_size,
+                            int(basis3dmm["vt_list"][t3][0] * uv_size) % uv_size,
                         ]
 
                     write_obj(

@@ -83,7 +83,7 @@ def load_from_npz(base_dir ,basis3dmm):
 
     #load else datas
     base_uv_path = os.path.join(FLAGS.resources_path, 'base_tex.png')
-    base_uv = Image.open(base_uv_path).resize((512,512))
+    base_uv = Image.open(base_uv_path).resize((512,512)).convert("RGB")
     base_uv = np.asarray(base_uv, np.float32)
 
     # mid-- left  -- right

@@ -243,7 +243,7 @@ def run(prefit_dir, modle_path):
         lambda_pt2d = 100
     else:
         lambda_project = 5000
-        lambda_reg_paras = 1000
+        lambda_reg_paras = 2000000
         lambda_3d_key = 1000
         lambda_pt2d = 100
     shape = fit_para_shape_with_kp3d(

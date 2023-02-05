@@ -193,6 +193,7 @@ def find_3d_keypoints_from_landmark_and_depth_86(
 
 def get_trans_base_to_camera(with_error_3d_points_slam, is_bfm):
     ####################### input: n * 3  ###################################
+    ## 这里是 86 keypoints 对应的三维坐标 可以尝试这里替换成 ali 数据范围的数据
     if is_bfm:
         a1 = [
             -7.23139801e01,
